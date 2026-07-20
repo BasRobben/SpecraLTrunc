@@ -101,8 +101,8 @@ def table_to_spectrum(table):
     mask = wavelength.notna() & intensity.notna()
 
     # Convert to numpy arrays
-    wavelength = wavelength[mask].to_numpy()
-    intensity = intensity[mask].to_numpy()
+    wavelength = np.array(wavelength[mask], dtype=float)
+    intensity = np.array(intensity[mask], dtype=float)
 
     # Force negative intensities to zero
     intensity[intensity < 0] = 0
