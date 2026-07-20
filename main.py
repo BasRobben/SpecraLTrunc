@@ -237,13 +237,17 @@ else:
     st.info("Enter absorption and emission spectrum to generate truncated emission spectrum.")
 
 ## Compute full lookup table and cache result
+@st.cache_data
+def generate_output_file(absorption, emission):
+    excitation_wls, excitation_spectra = spectral_trunc(absorption, emission)
+
+    return writeOutput(excitation_wls, excitation_spectra, emission)
 
 ## Download output file
 st.subheader("Download output", divider="gray")
 if len(absorption[0]) > 0 and len(emission[0]) > 0:
 
-    excitation_wls, excitation_spectra = spectral_trunc(absorption, emission)
-    output_file = writeOutput(excitation_wls, excitation_spectra, emission)
+    output_file = generate_output_file(absorption, emission)
 
     st.download_button(
         label="Download LightTools file",
