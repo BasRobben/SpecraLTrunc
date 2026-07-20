@@ -7,11 +7,11 @@ st.markdown(
     """
     **A useful tool for generating truncated emission spectra.**
 
-    This Python script generates an emission spectrum look-up table based on the absorption and emission spectra of a luminophore. The resulting table can be uploaded directly into LightTools for optical simulations.
+    LightTools treats absorption and emission events independently, where the wavelength of the emitted photon is chosen based on the full emission spectrum of the luminescent particle regardless of the wavelength of the absorbed photon. For luminescent species with spectral overlap, this can lead to the emission of a photon with higher energy than was initially absorbed (anti-Stokes). This results in unphysical results when the particle has significant spectral overlap, or experiences considerable irradiation within the overlapping region.
 
-    Because LightTools inherently interprets overlapping absorption and emission regions as anti-Stokes behavior in phosphor particles, the script automatically truncates the emission spectrum for wavelengths shorter than the excitation wavelength. This ensures correct handling of the spectral data inside LightTools.
+    LightTools features a look-up table-style property for the emission spectrum of phosphor particles, which allows the user to specify the emission spectrum at discrete excitation (or absorption) wavelengths. SpectraLTrunc aims to utilize this feature by truncating the emission spectrum for all wavelengths shorter than the excitation wavelength.
 
-    The script also formats the look-up table and adds a file header containing the required metadata so the output can be uploaded into LightTools without further editing.
+    SpectraLTrunc requires two input parameters, the absorption and emission spectrum, and provides a look-up table as output. This file includes all necessary metadata to ensure compatibility with LightTools and allow the user to import the truncated spectra directly into their LightTools particle using the 'Upload File' feature.
     """
 )
 
