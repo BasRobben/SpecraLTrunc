@@ -1,36 +1,55 @@
-# Emission Spectrum Look-Up Table Generator
+# SpectraLTrunc
+
+A web application for generating **LightTools-compatible emission spectrum lookup tables** from absorption and emission spectra.
+
+🌐 **Launch the application:** https://spectraltrunc.streamlit.app/
+
+---
 
 ## Description
-This Python script generates an emission spectrum look-up table based on the absorption and emission spectra of a luminophore. The resulting table can be uploaded directly into **LightTools** for optical simulations.
 
-Because LightTools inherently interprets overlapping absorption and emission regions as *anti-Stokes behavior* in phosphor particles, the script automatically truncates the emission spectrum for wavelengths shorter than the excitation wavelength. This ensures correct handling of the spectral data inside LightTools.
+LightTools treats absorption and emission events independently, where the wavelength of the emitted photon is chosen based on the full emission spectrum of the luminescent particle regardless of the wavelength of the absorbed photon. For luminescent species with spectral overlap, this can lead to the emission of a photon with higher energy than was initially absorbed (anti-Stokes). This results in unphysical results when the particle has significant spectral overlap, or experiences considerable irradiation within the overlapping region.
 
-The script also formats the look-up table and adds a **file header** containing the required metadata so the output can be uploaded into LightTools without further editing.
+LightTools features a look-up table-style property for the emission spectrum of phosphor particles, which allows the user to specify the emission spectrum at discrete excitation (or absorption) wavelengths. SpectraLTrunc aims to utilize this feature by truncating the emission spectrum for all wavelengths shorter than the excitation wavelength.
 
----
-
-## Requirements
-- Python 3.7+
-- `pandas`
+SpectraLTrunc requires two input parameters, the absorption and emission spectrum, and provides a look-up table as output. This file includes all necessary metadata to ensure compatibility with LightTools and allow the user to import the truncated spectra directly into their LightTools particle using the 'Load File' feature.
 
 ---
 
-## Usage
-1. Add the absorption and emission spectra of the desired luminophore as text files to the folder `spectra`, using the names `absorption.txt` and `emission.txt`.
-2. Run the script:
-    python remove_overlap.py
-   This will create a text file named `emission_adjusted.txt` containing the LightTools-compatible look-up table.
-3. In LightTools:
-   - Add a particle to a material under **Add Particle > Phosphor**  
-   - In the phosphor particle properties, go to **Emission Spectra** and click **Load File**  
-   - Upload `emission_adjusted.txt`
+## Features
+
+- Paste absorption and emission spectra directly from Excel
+- Automatic sorting of wavelength data
+- Automatic termination of spectra with zero intensity at both boundaries
+- Automatic correction of negative intensity values
+- Interactive preview of the input spectra
+- Interactive preview of the truncated emission spectrum
+- One-click generation and download of a LightTools-compatible lookup table
+
+---
+
+## Running locally
+
+Clone the repository and install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Launch the Streamlit application:
+
+```bash
+streamlit run main.py
+```
 
 ---
 
 ## Example
-An example absorption and emission spectrum is included for the organic luminophore **Lumogen F Red 305**. This dye is commonly used in Luminescent Solar Concentrator (LSC) devices. Because its spectra overlap significantly in the 550–650 nm region, it serves as an excellent example of the truncation technique implemented in this script.
+
+An example absorption and emission spectrum of **Lumogen F Red 305** is included. This luminophore exhibits significant spectral overlap and serves as an illustrative example of the truncation procedure.
 
 ---
 
 ## License
+
 MIT License
