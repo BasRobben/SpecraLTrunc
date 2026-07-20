@@ -1,5 +1,19 @@
 import csv
 import numpy as np
+import streamlit as st
+
+st.title("spectraLTrunc")
+st.markdown(
+    """
+    **A useful tool for generating truncated emission spectra.**
+
+    This Python script generates an emission spectrum look-up table based on the absorption and emission spectra of a luminophore. The resulting table can be uploaded directly into LightTools for optical simulations.
+
+    Because LightTools inherently interprets overlapping absorption and emission regions as anti-Stokes behavior in phosphor particles, the script automatically truncates the emission spectrum for wavelengths shorter than the excitation wavelength. This ensures correct handling of the spectral data inside LightTools.
+
+    The script also formats the look-up table and adds a file header containing the required metadata so the output can be uploaded into LightTools without further editing.
+    """
+)
 
 def spectrumReader(loc):
     with open(loc) as file:
