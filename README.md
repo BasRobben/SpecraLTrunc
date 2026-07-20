@@ -2,7 +2,7 @@
 
 A web application for generating **LightTools-compatible emission spectrum lookup tables** from absorption and emission spectra.
 
-🌐 **Launch the application:** https://spectraltrunc.streamlit.app/
+🌐 **Launch the application:** [https://spectraltrunc.streamlit.app/](https://spectraltrunc-app.streamlit.app/)
 
 ---
 
